@@ -9,17 +9,23 @@
             <input type="text" class="form-input" id="surname" formControlName="lastName">
         </div>
         <div class="form-control">
-            <input matInput [matDatepicker]="pickeryear" placeholder="Choose a date" formControlName="dateOfBirth">
+            <label for="date">Choose a date of birth</label>
+            <input id="date" matInput [matDatepicker]="pickeryear" class="form-input date-input"
+                formControlName="dateOfBirth">
             <mat-datepicker-toggle [for]="pickeryear">
             </mat-datepicker-toggle>
             <mat-datepicker #pickeryear startView="year"></mat-datepicker>
         </div>
-        <div class="form-control">
-            <select formControlName="framework">
-                <option value="null">Choose technology</option>
-                <option *ngFor="let technology of technologies" [ngValue]="technology.name">{{technology.name}}</option>
+        <div class="form-control" formGroupName="technology">
+            <label>Choose technology</label>
+            <select formControlName="framework" class="form-input">
+                <option *ngFor="let technology of technologies" [ngValue]="technology">{{technology}}</option>
+            </select>
+            <button class="form-btn version-btn" (click)="setVersion()">Choose version</button>
+            <select *ngIf="versions.length" formControlName="frameworkVersion" class="form-input">
+                <option *ngFor="let version of versions" [ngValue]="version">{{version}}</option>
             </select>
         </div>
-        <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button class="form-btn" type="submit" [disabled]="form.invalid">Submit</button>
     </form>
 </div>
