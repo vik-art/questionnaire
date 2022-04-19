@@ -1,0 +1,47 @@
+<div class="container">
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-fields">
+            <div class="form-control static">
+                <label for="name">First name</label>
+                <input type="text" class="form-input" id="name" formControlName="firstName">
+            </div>
+            <div class="form-control static">
+                <label for="surname">Last name</label>
+                <input type="text" class="form-input" id="surname" formControlName="lastName">
+            </div>
+            <div class="form-control static">
+                <label for="date">Choose a date of birth</label>
+                <input id="date" matInput [matDatepicker]="pickeryear" class="form-input date-input"
+                    formControlName="dateOfBirth">
+                <mat-datepicker-toggle [for]="pickeryear">
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickeryear startView="year"></mat-datepicker>
+            </div>
+            <div class="form-control" formGroupName="technology">
+                <label>Choose technology</label>
+                <select formControlName="framework" class="form-input">
+                    <option *ngFor="let technology of technologies" [ngValue]="technology">{{technology}}</option>
+                </select>
+                <button type="button" class="form-btn version-btn" (click)="setVersion()">Choose version</button>
+                <select *ngIf="versions; else noVersion" formControlName="frameworkVersion" class="form-input">
+                    <option *ngFor="let version of versions" [ngValue]="version">{{version}}</option>
+                </select>
+            </div>
+            <div class="form-control static">
+                <label for="Email">Email</label>
+                <input type="text" class="form-input" id="email" formControlName="email">
+            </div>
+            <div class="form-control" formGroupName="hobbies">
+                <button type="button" class="form-btn" (click)="addHobbie()">Add hobbie</button>
+                <div *ngFor="let control of initControls(), let idx = index">
+                    <label>{{idx + 1}} <input type="text" class="form-input" [formControlName]="idx"></label>
+                </div>
+            </div>
+        </div>
+        <button class="form-btn" type="submit" [disabled]="form.invalid">Submit</button>
+    </form>
+
+    <ng-template #noVersion>
+        <p>Plese, choose framework!</p>
+    </ng-template>
+</div>
