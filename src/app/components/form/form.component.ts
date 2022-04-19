@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   form!: FormGroup;
-  versions: Array<string> = [];
+  versions!: Array<string>;
 
   technologies = ["Angular", "React", "Vue"];
 
@@ -28,13 +28,16 @@ export class FormComponent implements OnInit {
       technology: new FormGroup({
         framework: new FormControl("", Validators.required),
         frameworkVersion: new FormControl("", Validators.required)
-      })
+      }),
+      email: new FormControl("", [Validators.email, Validators.required]),
+      hobbies: new FormArray([], [Validators.required, Validators.minLength(1)])
     })
     this.form.valueChanges.subscribe(() => {})
   }
 
   submit() {
-    console.log(this.form.value)
+    console.log(this.form.value);
+    this.form.reset();
   }
 
   setVersion() {
@@ -46,5 +49,11 @@ export class FormComponent implements OnInit {
     const framework = this.form.get("technology")?.get("framework")?.value;
     this.versions = frameworkVersion[framework];
   }
-
+  addHobbie() {
+    const control = new FormControl("", [Validators.required]);
+    (this.form.get("hobbies") as FormArray).push(control)
+  }
+  initControls() {
+   return (this.form.get('hobbies') as FormArray).controls
+  }
 }

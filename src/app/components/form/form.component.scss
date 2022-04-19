@@ -4,9 +4,16 @@
 }
 
 .form {
-    width: 40%;
+    text-align: center;
+    &-fields {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    }
     &-control {
-        width: 100%;
+        text-align: start;
+        width: 48%;
         border: 1px dotted #7a7a7a;
         margin-bottom: 20px;
         padding: 20px;
@@ -56,4 +63,8 @@
 }
 .date-input {
     width: 90%;
+}
+
+.static {
+    height: 100px;
 }
