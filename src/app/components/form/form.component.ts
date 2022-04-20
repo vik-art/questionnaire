@@ -5,8 +5,9 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
+
 export class FormComponent implements OnInit {
 
   form!: FormGroup;
@@ -24,7 +25,7 @@ export class FormComponent implements OnInit {
     this.form = new FormGroup({
       firstName: new FormControl("", [Validators.required]),
       lastName: new FormControl("", [Validators.required]),
-      dateOfBirth: new FormControl("", [Validators.required]),
+      dateOfBirth: new FormControl(),
       technology: new FormGroup({
         framework: new FormControl("", Validators.required),
         frameworkVersion: new FormControl("", Validators.required)
@@ -36,8 +37,20 @@ export class FormComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
+    const { firstName, lastName, dateOfBirth, email, hobbies } = this.form.value;
+    const { framework, frameworkVersion } = this.form.value.technology;
+    const user = {
+      firstName,
+      lastName,
+      dateOfBirth: new Date(dateOfBirth).toLocaleDateString().replace(/\./g, '-'),
+      framework,
+      frameworkVersion,
+      email,
+      hobbies
+    }
+    console.log(user);
     this.form.reset();
+    return user;
   }
 
   setVersion() {

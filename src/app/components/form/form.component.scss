@@ -55,6 +55,7 @@
         &:disabled {
             font-weight: 400;
             color: rgb(145, 142, 142);
+            cursor: not-allowed;
         }
     }
     .version-btn {
