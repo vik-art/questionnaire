@@ -9,12 +9,13 @@ import { FormComponent } from './components/form/form.component';
 import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
+import { UserService } from './services/user.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent
+    FormComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +27,9 @@ import { MatInputModule } from '@angular/material/input'
     MatInputModule,
     MatNativeDateModule
   ],
- providers: [],
+  providers: [
+   UserService
+ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

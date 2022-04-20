@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <button class="form-btn" type="submit">Submit</button>
+        <button class="form-btn" type="submit" [disabled]="form.invalid">Submit</button>
     </form>
 
     <ng-template #noVersion>
