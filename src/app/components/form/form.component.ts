@@ -16,7 +16,9 @@ export class FormComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   versions!: Array<string>;
+  showVersions: boolean = false;
   hobbie!: FormGroup;
+  showHobbieField: boolean = false;
 
   technologies = ["Angular", "React", "Vue"];
 
@@ -76,9 +78,13 @@ export class FormComponent implements OnInit, OnDestroy {
     this.userService.setUser(user);
     console.log(user)
     this.form.reset();
+    this.versions = [];
+    this.showVersions = false;
+    this.showHobbieField = false;
   }
 
   setVersion() {
+    this.showVersions = true;
     const frameworkVersion: {[key: string]: Array<string>} = {
       'Angular': ['1.1.1', '1.2.1', '1.3.3'],
       'React': ['2.1.2', '3.2.4', '4.3.1'],
@@ -90,6 +96,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
 
   addHobbie() {
+    this.showHobbieField = true;
     this.hobbie = new FormGroup({
       name: new FormControl("", [Validators.required]),
       duration: new FormControl("", [Validators.required])
