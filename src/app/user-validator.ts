@@ -1,17 +1,19 @@
-import { FormControl } from "@angular/forms";
-import { UserService } from "./services/user.service";
+import { AbstractControl } from "@angular/forms";
+import { Observable } from "rxjs";
 
 export class UserValidator {
-    static userService: UserService;
-    constructor(
-    ) { }
-   
-    static existingEmail(control: FormControl): { [key: string]: boolean } {
-        const emails = this.userService.getUsersEmails();
-        if (emails!.includes(control.value)) {
-            return {existingEmail: true};
-        } else {
-            return { existingEmail: false};
-    }
-    }
+ static uniqueEmail( control: AbstractControl ): Promise<any> | Observable<any> {
+   return new Promise(resolve => {     
+       setTimeout(() => {
+         if (control.value === 'test@test.test') {
+           resolve({
+             repeatedEmail: true
+           })
+         } else {
+           resolve(null)
+         }
+       }, 2000)
+     }
+   )
+  }
 }

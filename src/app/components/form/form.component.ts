@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/common/user.interface';
 import { UserService } from 'src/app/services/user.service';
+import  { UserValidator } from 'src/app/user-validator';
 
 
 @Component({
@@ -21,8 +22,9 @@ export class FormComponent implements OnInit, OnDestroy {
   unSubscriber = new Subscription();
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
   ) { }
+
   ngOnDestroy(): void {
     this.unSubscriber.unsubscribe();
   }
@@ -33,15 +35,26 @@ export class FormComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form = new FormGroup({
-      firstName: new FormControl("", [Validators.required]),
-      lastName: new FormControl("", [Validators.required]),
+      firstName: new FormControl("",
+        [Validators.required
+        ]),
+      lastName: new FormControl("",
+        [Validators.required
+        ]),
       dateOfBirth: new FormControl(),
       technology: new FormGroup({
-        framework: new FormControl("", Validators.required),
-        frameworkVersion: new FormControl("", Validators.required)
+        framework: new FormControl("",
+          Validators.required),
+        frameworkVersion: new FormControl("",
+          Validators.required)
       }),
-      email: new FormControl("", [Validators.email, Validators.required]),
-      hobbies: new FormArray([], [Validators.required, Validators.minLength(1)])
+      email: new FormControl("", [
+        Validators.email,
+        Validators.required
+      ], [UserValidator.uniqueEmail]),
+      hobbies: new FormArray([],
+        [Validators.required,
+        Validators.minLength(1)])
     })
     this.unSubscriber.add(
     this.form.valueChanges.subscribe(() => {}))
@@ -61,7 +74,6 @@ export class FormComponent implements OnInit, OnDestroy {
     }
     this.userService.setUser(user);
     this.form.reset();
-    console.log(this.userService.getUsersEmails())
   }
 
   setVersion() {

@@ -9,17 +9,6 @@ export class UserService {
     setUser(user: User) {
         this.users.push(user);
         return this.users;
-    } 
-
-    getUsersEmails() {
-        if (this.users.length) {
-            const emails: Array<string> = [];
-            this.users.map((user) => {
-                emails.push(user.email)
-            })
-            return emails;
-        } else {
-            return null;
-        }
     }
+
 }
