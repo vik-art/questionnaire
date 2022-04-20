@@ -41,7 +41,7 @@
                 </div>
                 <button type="button" [disabled]="form.get('technology.framework')?.invalid"
                     class="form-btn version-btn" (click)="setVersion()">Choose version</button>
-                <select *ngIf="versions; else noVersion" formControlName="frameworkVersion" class="form-input">
+                <select *ngIf="showVersions; else noVersion" formControlName="frameworkVersion" class="form-input">
                     <option *ngFor="let version of versions" [ngValue]="version">{{version}}</option>
                 </select>
                 <div
@@ -62,17 +62,19 @@
             </div>
             <div class="form-control" formGroupName="hobbies">
                 <button type="button" class="form-btn" (click)="addHobbie()">Add hobbie</button>
-                <div *ngFor="let control of initControls(), let idx = index" [formGroupName]="idx" id="{{idx}}">
-                    <label>
-                        <div class="hobbie-numeration">{{idx + 1}}</div>
-                        <input type="text" class="form-input" formControlName="name" placeholder="Name">
-                    </label>
-                    <label>
-                        <input type="text" class="form-input" formControlName="duration" placeholder="Duration">
-                    </label>
-                    <button class="form-btn hobbies-btn" (click)="removeContol(idx)">
-                        Remove
-                    </button>
+                <div *ngIf="showHobbieField">
+                    <div *ngFor="let control of initControls(), let idx = index" [formGroupName]="idx" id="{{idx}}">
+                        <label>
+                            <div class="hobbie-numeration">{{idx + 1}}</div>
+                            <input type="text" class="form-input" formControlName="name" placeholder="Name">
+                        </label>
+                        <label>
+                            <input type="text" class="form-input" formControlName="duration" placeholder="Duration">
+                        </label>
+                        <button class="form-btn hobbies-btn" (click)="removeContol(idx)">
+                            Remove
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
