@@ -2,7 +2,13 @@
     width: 100%;
     margin: 0 auto;
 }
+input.ng-dirty.ng-invalid {
+    border-bottom: solid #ff0000 2px;
+}
 
+input.ng-dirty.ng-valid {
+    border-bottom: solid green 2px;
+}
 .form {
     text-align: center;
     &-fields {
