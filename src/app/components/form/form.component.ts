@@ -16,6 +16,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   versions!: Array<string>;
+  hobbie!: FormGroup;
 
   technologies = ["Angular", "React", "Vue"];
 
@@ -73,6 +74,7 @@ export class FormComponent implements OnInit, OnDestroy {
       hobbies
     }
     this.userService.setUser(user);
+    console.log(user)
     this.form.reset();
   }
 
@@ -88,12 +90,19 @@ export class FormComponent implements OnInit, OnDestroy {
 
 
   addHobbie() {
-    const control = new FormControl("", [Validators.required]);
-    (this.form.get("hobbies") as FormArray).push(control)
+    this.hobbie = new FormGroup({
+      name: new FormControl("", [Validators.required]),
+      duration: new FormControl("", [Validators.required])
+    });
+    (this.form.get("hobbies") as FormArray).push(this.hobbie)
   }
 
 
   initControls() {
    return (this.form.get('hobbies') as FormArray).controls
   }
+
+  removeContol(idx: number) {
+    return (this.form.get("hobbies") as FormArray).removeAt(idx)
+   }
 }
