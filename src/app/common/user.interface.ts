@@ -5,5 +5,10 @@ export interface User {
     framework: string,
     frameworkVersion: string,
     email: string,
-    hobbies: Array<string>
+    hobbies: Array<Hobbie>
+}
+
+export interface Hobbie {
+    name: string,
+    duration: string
 }
