@@ -9,23 +9,28 @@
                         empty!</div>
                 </div>
             </div>
+            <div class="form-control" formGroupName="hobbies">
+                <button type="button" class="form-btn" (click)="addHobbie()">Add hobbie</button>
+                <div *ngIf="showHobbieField">
+                    <div *ngFor="let control of initControls(), let idx = index" [formGroupName]="idx" id="{{idx}}">
+                        <label>
+                            <div class="hobbie-numeration">{{idx + 1}}</div>
+                            <input type="text" class="form-input" formControlName="name" placeholder="Name">
+                        </label>
+                        <label>
+                            <input type="text" class="form-input" formControlName="duration" placeholder="Duration">
+                        </label>
+                        <button class="form-btn hobbies-btn" (click)="removeContol(idx)">
+                            Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="form-control static">
                 <label for="surname">Last name</label>
                 <input type="text" class="form-input" id="surname" formControlName="lastName">
                 <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
                     <div class="validation" *ngIf="form.get('lastName')?.hasError('required')">The field cannot be
-                        empty!</div>
-                </div>
-            </div>
-            <div class="form-control static">
-                <label for="date">Choose a date of birth</label>
-                <input id="date" matInput [matDatepicker]="pickeryear" class="form-input date-input"
-                    formControlName="dateOfBirth">
-                <mat-datepicker-toggle [for]="pickeryear">
-                </mat-datepicker-toggle>
-                <mat-datepicker #pickeryear startView="multi-year"></mat-datepicker>
-                <div *ngIf="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.touched">
-                    <div class="validation" *ngIf="form.get('dateOfBirth')?.hasError('required')">The field cannot be
                         empty!</div>
                 </div>
             </div>
@@ -52,29 +57,25 @@
                 </div>
             </div>
             <div class="form-control static">
+                <label for="date">Choose a date of birth</label>
+                <input id="date" matInput [matDatepicker]="pickeryear" class="form-input date-input"
+                    formControlName="dateOfBirth">
+                <mat-datepicker-toggle [for]="pickeryear">
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickeryear startView="multi-year"></mat-datepicker>
+                <div *ngIf="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.touched">
+                    <div class="validation" *ngIf="form.get('dateOfBirth')?.hasError('required')">The field cannot be
+                        empty!</div>
+                </div>
+            </div>
+
+            <div class="form-control static">
                 <label for="Email">Email</label>
                 <input type="text" class="form-input" id="email" formControlName="email">
                 <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
                     <div class="validation" *ngIf="form.get('email')?.hasError('required')">The field cannot be
                         empty!</div>
                     <div class="validation" *ngIf="form.get('email')?.hasError('email')">The email is invalid!</div>
-                </div>
-            </div>
-            <div class="form-control" formGroupName="hobbies">
-                <button type="button" class="form-btn" (click)="addHobbie()">Add hobbie</button>
-                <div *ngIf="showHobbieField">
-                    <div *ngFor="let control of initControls(), let idx = index" [formGroupName]="idx" id="{{idx}}">
-                        <label>
-                            <div class="hobbie-numeration">{{idx + 1}}</div>
-                            <input type="text" class="form-input" formControlName="name" placeholder="Name">
-                        </label>
-                        <label>
-                            <input type="text" class="form-input" formControlName="duration" placeholder="Duration">
-                        </label>
-                        <button class="form-btn hobbies-btn" (click)="removeContol(idx)">
-                            Remove
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
