@@ -29,7 +29,7 @@ input.ng-dirty.ng-valid {
     }
     &-input {
         width: 100%;
-        height: 30px;
+        height: 40px;
         outline: none;
         border: none;
         border-bottom: 1px solid #000;
@@ -74,4 +74,21 @@ input.ng-dirty.ng-valid {
 
 .static {
     height: 100px;
+}
+.hobbies-btn {
+    margin-top: 10px;
+}
+
+.hobbie-numeration {
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(24, 22, 22);
+    border-radius: 50%;
+}
+.validation {
+    color:#ff0000;
 }
